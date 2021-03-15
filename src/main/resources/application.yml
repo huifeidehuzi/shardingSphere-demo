@@ -15,12 +15,12 @@ spring:
         # 配置第 1 个数据源
       test0:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://platform-b.mysql.test.tcit.cc:3306/test0?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test0?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: admin
-        password: Yixin@kkc123
+        password: 12345
         # 配置第 2 个数据源
       test1:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://platform-b.mysql.test.tcit.cc:3306/test1?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test1?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: admin
-        password: Yixin@kkc123
+        password: 12345
