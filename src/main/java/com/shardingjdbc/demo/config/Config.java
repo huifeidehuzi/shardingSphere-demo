@@ -3,6 +3,7 @@ package com.shardingjdbc.demo.config;
 import com.shardingjdbc.demo.shardingAlgorithm.DataBaseShardingAlgorithm;
 import com.shardingjdbc.demo.shardingAlgorithm.TableShardingAlgorithm;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.shardingsphere.api.config.sharding.KeyGeneratorConfiguration;
 import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;
 import org.apache.shardingsphere.api.config.sharding.TableRuleConfiguration;
 import org.apache.shardingsphere.api.config.sharding.strategy.StandardShardingStrategyConfiguration;
@@ -82,8 +83,11 @@ public class Config {
         orderTableRuleConfig.setDatabaseShardingStrategyConfig(new StandardShardingStrategyConfiguration("id", new DataBaseShardingAlgorithm()));
         orderTableRuleConfig.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("id", new TableShardingAlgorithm()));
 
+        // 自定义id生成
+        orderTableRuleConfig.setKeyGeneratorConfig(new KeyGeneratorConfiguration("My","id"));
 
         shardingRuleConfig.getTableRuleConfigs().add(orderTableRuleConfig);
+
 
 
         // 获取数据源对象

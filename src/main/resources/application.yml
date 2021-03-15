@@ -24,23 +24,3 @@ spring:
         jdbc-url: jdbc:mysql://platform-b.mysql.test.tcit.cc:3306/test1?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: admin
         password: Yixin@kkc123
-    sharding:
-      default-database-strategy:
-        inline:
-          sharding-column: id
-          algorithm-expression: test$->{id % 2}
-      tables:
-        test_order:
-          actual-data-nodes: test$->{0..1}.test_order$->{0..2}
-          table-strategy:
-            inline:
-              sharding-column: id
-              algorithm-expression: test_order$->{id % 2}
-          key-generator:
-            column: id
-            type: SNOWFLAKE
-            props:
-              worker:
-                id: 123
-              sql:
-                show: true

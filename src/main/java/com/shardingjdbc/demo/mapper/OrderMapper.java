@@ -13,6 +13,6 @@ public interface OrderMapper {
     Order getById(@Param("id") Long id);
 
 
-    @Insert("insert into test_order(id,age,name) values(#{id},#{age},#{name})")
+    @Insert("insert into test_order(age,name) values(#{age},#{name})")
     int insert(Order order);
 }
