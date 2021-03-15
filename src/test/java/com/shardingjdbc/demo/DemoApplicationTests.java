@@ -1,6 +1,5 @@
 package com.shardingjdbc.demo;
 
-import com.shardingjdbc.demo.entity.Order;
 import com.shardingjdbc.demo.mapper.OrderMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;

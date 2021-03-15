@@ -1,9 +1,11 @@
 package com.shardingjdbc.demo.config;
 
+import com.shardingjdbc.demo.shardingAlgorithm.DataBaseShardingAlgorithm;
+import com.shardingjdbc.demo.shardingAlgorithm.TableShardingAlgorithm;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;
 import org.apache.shardingsphere.api.config.sharding.TableRuleConfiguration;
-import org.apache.shardingsphere.api.config.sharding.strategy.InlineShardingStrategyConfiguration;
+import org.apache.shardingsphere.api.config.sharding.strategy.StandardShardingStrategyConfiguration;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -70,8 +72,15 @@ public class Config {
 
         TableRuleConfiguration orderTableRuleConfig = new TableRuleConfiguration("test_order", "test${0..1}.test_order${0..2}");
         // 配置分库 + 分表策略
-        orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "test${id % 2}"));
+        // Inline Groovy表达式，只支持简单的表达式配置，满足不了复杂的业务场景
+        /*orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "test${id % 2}"));
         orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "test_order${id % 2}"));
+*/
+
+        // 支持自定义分表分库策略
+        // 有N个实现，可以看下ShardingStrategyConfiguration的每个实现类
+        orderTableRuleConfig.setDatabaseShardingStrategyConfig(new StandardShardingStrategyConfiguration("id", new DataBaseShardingAlgorithm()));
+        orderTableRuleConfig.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("id", new TableShardingAlgorithm()));
 
 
         shardingRuleConfig.getTableRuleConfigs().add(orderTableRuleConfig);
